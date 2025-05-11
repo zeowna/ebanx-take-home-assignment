@@ -11,20 +11,21 @@ Technologies used:
 3. PostgreSQL;
 4. Typeorm;
 5. Docker and Docker Compose.
+6. ngrok to serve into internet
 
-to run the project run the following  command:
-```bash
-$ docker compose up rest-api --build
-```
+To run the project run the following command:
 
-Then you'll need to create the database inside Postgres:
-```bash
-$ docker compose exec db createdb -U postgres ebanxs-take-home-assignment-development
-```
-
-Then you'll need to run the DB migrations:
+First run the database migrations
 ```bash
 $ docker compose run --rm rest-api yarn migration:run
 ```
+Then you can start the application normally
+
+```bash
+$ docker compose up rest-api
+```
+
+Then you'll need to run the DB migrations:
+
 
 This project lacks unit tests, but passes yours ``automated test suite``

@@ -3,6 +3,7 @@ services:
     image: postgres:17-alpine
     environment:
       POSTGRES_PASSWORD: 'root'
+      POSTGRES_DB: 'ebanxs-take-home-assignment-development'
     ports:
       - 5432:5432
   rest-api:
