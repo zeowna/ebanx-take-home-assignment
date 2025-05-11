@@ -9,9 +9,6 @@ export class CreateBalanceDto {
   }
 
   get account() {
-    const account = new Account();
-    account.id = this.accountId;
-
-    return account;
+    return new Account(this.accountId);
   }
 }
