@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { AbstractCreateEventService } from './abstract-create-event.service';
 import { CreateDepositEventService } from './create-deposit-event.service';
 import { CreateTransferEventService } from './create-transfer-event.service';
@@ -13,21 +13,18 @@ export class CreateEventServiceFactory {
     private readonly createTransferEventService: CreateTransferEventService,
   ) {}
 
-  getServiceByType<T = AbstractCreateEventService>(
-    type: EventTypesEnum,
-  ): T | null {
-    switch (type) {
-      case EventTypesEnum.Deposit: {
+  getServiceByEventType<T = AbstractCreateEventService>(
+    eventType: EventTypesEnum,
+  ): T {
+    switch (eventType) {
+      case EventTypesEnum.Deposit:
         return this.createDepositEventServiceTsService as T;
-      }
-      case EventTypesEnum.Withdraw: {
+      case EventTypesEnum.Withdraw:
         return this.createWithdrawEventService as T;
-      }
-      case EventTypesEnum.Transfer: {
+      case EventTypesEnum.Transfer:
         return this.createTransferEventService as T;
-      }
       default:
-        return null;
+        throw new NotFoundException(`Unknown EventType ${eventType as string}`);
     }
   }
 }

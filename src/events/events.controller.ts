@@ -19,7 +19,7 @@ export class EventsController {
     @Body() createEventDto: CreateEventDto,
     @ResponseParam() response: Response,
   ) {
-    const service = this.createEventServiceFactory.getServiceByType(
+    const service = this.createEventServiceFactory.getServiceByEventType(
       createEventDto.type,
     );
 
