@@ -15,7 +15,11 @@ Technologies used:
 
 To run the project run the following command:
 
-First run the database migrations
+First install the project dependencies
+```bash
+$ docker compose run --rm rest-api yarn
+```
+Then run the database migrations
 ```bash
 $ docker compose run --rm rest-api yarn migration:run
 ```
@@ -24,8 +28,5 @@ Then you can start the application normally
 ```bash
 $ docker compose up rest-api
 ```
-
-Then you'll need to run the DB migrations:
-
 
 This project lacks unit tests, but passes yours ``automated test suite``
