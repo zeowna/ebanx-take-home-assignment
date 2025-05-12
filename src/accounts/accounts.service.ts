@@ -16,8 +16,7 @@ export class AccountsService extends AbstractEntityService<Account> {
   }
 
   async create(createAccountDto: CreateAccountDto) {
-    const payload = this.repository.create(createAccountDto);
-    const created = await this.repository.save(payload);
+    const created = await super.create(createAccountDto);
 
     // Forces the id param
     await this.repository
