@@ -1,7 +1,12 @@
-import { Body, Controller, Post, Response } from '@nestjs/common';
-import { CreateEventDto } from './dto/create-event.dto';
-import { Response as Res } from 'express';
+import {
+  Body,
+  Controller,
+  Post,
+  Response as ResponseParam,
+} from '@nestjs/common';
+import { Response } from 'express';
 import { CreateEventServiceFactory } from './create-event-service.factory';
+import { CreateEventDto } from './dto/create-event.dto';
 
 @Controller('event')
 export class EventsController {
@@ -10,23 +15,21 @@ export class EventsController {
   ) {}
 
   @Post()
-  async create(@Body() createEventDto: CreateEventDto, @Response() res: Res) {
+  async create(
+    @Body() createEventDto: CreateEventDto,
+    @ResponseParam() response: Response,
+  ) {
     const service = this.createEventServiceFactory.getServiceByType(
       createEventDto.type,
     );
 
-    if (!service) {
-      res.status(404).send('0');
+    const eventResponse = await service.execute(createEventDto);
+
+    if (!eventResponse) {
+      response.status(404).send('0');
       return;
     }
 
-    const response = await service.execute(createEventDto);
-
-    if (!response) {
-      res.status(404).send('0');
-      return;
-    }
-
-    res.status(201).send(response);
+    response.status(201).send(eventResponse);
   }
 }
