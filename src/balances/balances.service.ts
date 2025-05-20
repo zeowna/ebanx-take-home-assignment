@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { DataSource, QueryRunner, Repository } from 'typeorm';
 import { CreateBalanceDto } from './dto/create-balance.dto';
 import { Balance } from './entities/balance.entity';
-import { AbstractEntityService } from 'src/common/services/abstract-entity-service.service';
+import { AbstractEntityService } from '../common/services/abstract-entity-service.service';
 
 @Injectable()
 export class BalancesService extends AbstractEntityService<Balance> {
@@ -63,6 +63,13 @@ export class BalancesService extends AbstractEntityService<Balance> {
     }
 
     const currentBalance = balance.currentBalance - amount;
+
+    if (currentBalance < balance.account!.negativeLimit) {
+      throw new UnprocessableEntityException(
+        `Negative balance: ${currentBalance}`,
+      );
+    }
+
     return this.create(
       new CreateBalanceDto({
         accountId,

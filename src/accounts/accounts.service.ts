@@ -3,7 +3,7 @@ import { CreateAccountDto } from './dto/create-account.dto';
 import { DataSource, Repository } from 'typeorm';
 import { Account } from './entities/account.entity';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { AbstractEntityService } from 'src/common/services/abstract-entity-service.service';
+import { AbstractEntityService } from '../common/services/abstract-entity-service.service';
 
 @Injectable()
 export class AccountsService extends AbstractEntityService<Account> {

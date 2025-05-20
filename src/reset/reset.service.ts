@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { EventsService } from '../events/events.service';
 import { BalancesService } from '../balances/balances.service';
-import { AccountsService } from 'src/accounts/accounts.service';
-import { CreateBalanceDto } from 'src/balances/dto/create-balance.dto';
-import { CreateAccountDto } from 'src/accounts/dto/create-account.dto';
+import { AccountsService } from '../accounts/accounts.service';
+import { CreateBalanceDto } from '../balances/dto/create-balance.dto';
+import { CreateAccountDto } from '../accounts/dto/create-account.dto';
 
 @Injectable()
 export class ResetService {

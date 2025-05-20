@@ -1,5 +1,5 @@
-import { Account } from 'src/accounts/entities/account.entity';
-import { AbstractEntity } from 'src/common/entities/abstract-entity.entity';
+import { Account } from '../../accounts/entities/account.entity';
+import { AbstractEntity } from '../../common/entities/abstract-entity.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()

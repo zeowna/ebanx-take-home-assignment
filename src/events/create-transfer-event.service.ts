@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
-import { BalancesService } from 'src/balances/balances.service';
+import { BalancesService } from '../balances/balances.service';
 import { DataSource } from 'typeorm';
 import { AbstractCreateEventService } from './abstract-create-event.service';
-import { CreateEventDto } from './dto/create-event.dto';
 import { EventsService } from './events.service';
+import { CreateTransferEventDto } from './dto/create-transfer-event.dto';
 
 @Injectable()
 export class CreateTransferEventService extends AbstractCreateEventService {
@@ -16,20 +16,20 @@ export class CreateTransferEventService extends AbstractCreateEventService {
     super(dataSource, eventsService);
   }
 
-  async execute(createEventDto: CreateEventDto) {
+  async execute(createEventDto: CreateTransferEventDto) {
     const queryRunner = await this.createQueryRunner();
 
     try {
-      await queryRunner.startTransaction();
+      await queryRunner.startTransaction('SERIALIZABLE');
 
       const [originBalance, destinationBalance] = await Promise.all([
         this.balancesService.subtractBalance(
-          createEventDto.origin!,
+          createEventDto.origin,
           createEventDto.amount,
           queryRunner,
         ),
         this.balancesService.sumBalance(
-          createEventDto.destination!,
+          createEventDto.destination,
           createEventDto.amount,
           queryRunner,
         ),

@@ -1,5 +1,5 @@
-import { AbstractEntity } from 'src/common/entities/abstract-entity.entity';
 import { Column, Entity } from 'typeorm';
+import { AbstractEntity } from '../../common/entities/abstract-entity.entity';
 
 @Entity()
 export class Account extends AbstractEntity {
@@ -11,6 +11,9 @@ export class Account extends AbstractEntity {
    */
   @Column()
   nationalRegister: string;
+
+  @Column({ type: 'double precision', default: 0 })
+  negativeLimit: number;
 
   constructor(id?: number) {
     super();

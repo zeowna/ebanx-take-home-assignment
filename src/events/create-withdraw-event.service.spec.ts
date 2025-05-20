@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateWithdrawEventServiceService } from './create-withdraw-event';
+import { CreateWithdrawEventServiceService } from './create-withdraw-event.service';
 
 describe('CreateWithdrawEventServiceService', () => {
   let service: CreateWithdrawEventServiceService;
@@ -9,7 +9,9 @@ describe('CreateWithdrawEventServiceService', () => {
       providers: [CreateWithdrawEventServiceService],
     }).compile();
 
-    service = module.get<CreateWithdrawEventServiceService>(CreateWithdrawEventServiceService);
+    service = module.get<CreateWithdrawEventServiceService>(
+      CreateWithdrawEventServiceService,
+    );
   });
 
   it('should be defined', () => {

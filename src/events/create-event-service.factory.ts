@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { AbstractCreateEventService } from './abstract-create-event.service';
 import { CreateDepositEventService } from './create-deposit-event.service';
 import { CreateTransferEventService } from './create-transfer-event.service';
-import { CreateWithdrawEventService } from './create-withdraw-event';
+import { CreateWithdrawEventService } from './create-withdraw-event.service';
 import { EventTypesEnum } from './entities/event-types.enum';
 
 @Injectable()

@@ -1,11 +1,12 @@
-import { EventTypesEnum } from '../entities/event-types.enum';
+import { AbstractCreateEventDto } from './abstract-create-event.dto';
+import { IsNumber, IsOptional } from 'class-validator';
 
-export class CreateEventDto {
-  type: EventTypesEnum;
-
+export class CreateEventDto extends AbstractCreateEventDto {
+  @IsOptional()
+  @IsNumber()
   origin?: number;
 
+  @IsOptional()
+  @IsNumber()
   destination?: number;
-
-  amount: number;
 }

@@ -1,7 +1,11 @@
-import { Account } from 'src/accounts/entities/account.entity';
+import { Account } from '../../accounts/entities/account.entity';
+import { IsNumber } from 'class-validator';
 
 export class CreateBalanceDto {
+  @IsNumber()
   accountId: number;
+
+  @IsNumber()
   currentBalance: number;
 
   constructor(props: Partial<CreateBalanceDto>) {
